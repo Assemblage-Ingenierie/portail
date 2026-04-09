@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(powershell -Command \"where.exe gh; git config --global user.email; git config --global user.name\")",
+      "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue; git config --global user.email; git config --global user.name\")",
+      "Bash(git config:*)"
+    ]
+  }
+}
