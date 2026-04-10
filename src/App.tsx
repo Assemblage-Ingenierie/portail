@@ -308,8 +308,34 @@ export default function App() {
                   boxShadow: hovered === app.id ? `0 4px 18px rgba(227,5,19,0.10)` : '0 1px 3px rgba(0,0,0,0.05)',
                   transition: 'border-color 0.15s, box-shadow 0.15s',
                   display: 'flex', flexDirection: 'column',
+                  position: 'relative',
                 }}>
                 <div style={{ height: 4, background: AI_ROUGE }} />
+
+                {/* Bouton crayon positionné en haut à droite */}
+                <button
+                  onClick={e => { e.stopPropagation(); openEdit(app) }}
+                  title="Modifier"
+                  style={{
+                    position: 'absolute', top: 12, right: 12, zIndex: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: 28, height: 28,
+                    fontSize: 15, color: AI_VIOLET,
+                    background: 'white', border: `1px solid ${AI_GRIS}`,
+                    borderRadius: 6, cursor: 'pointer',
+                    transition: 'all 0.12s',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = AI_VIOLET
+                    e.currentTarget.style.background = AI_GRIS
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = AI_GRIS
+                    e.currentTarget.style.background = 'white'
+                  }}
+                >
+                  ✎
+                </button>
 
                 <div style={{ padding: '18px 18px 14px', display: 'flex', gap: 14, flex: 1 }}>
                   {/* Icône */}
@@ -350,33 +376,9 @@ export default function App() {
                 {/* Footer card */}
                 <div style={{ borderTop: `1px solid ${AI_GRIS}`, padding: '9px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: AI_GRIS_CLAIR }}>
                   <span style={{ fontSize: 11, color: '#4D4D4D', fontFamily: 'monospace' }}>{app.url}</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {/* Bouton Edit */}
-                    <button
-                      onClick={() => openEdit(app)}
-                      title="Modifier"
-                      style={{
-                        display: 'flex', alignItems: 'center', gap: 4,
-                        fontSize: 11, fontWeight: 600, color: AI_VIOLET,
-                        background: 'none', border: `1px solid ${AI_GRIS}`,
-                        borderRadius: 4, padding: '3px 8px', cursor: 'pointer',
-                        transition: 'all 0.12s',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.borderColor = AI_VIOLET
-                        e.currentTarget.style.background = AI_GRIS
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.borderColor = AI_GRIS
-                        e.currentTarget.style.background = 'none'
-                      }}
-                    >
-                      ✎ Modifier
-                    </button>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: AI_ROUGE, opacity: hovered === app.id ? 1 : 0.4, transition: 'opacity 0.15s', cursor: 'pointer' }}>
-                      Accéder →
-                    </span>
-                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: AI_ROUGE, opacity: hovered === app.id ? 1 : 0.4, transition: 'opacity 0.15s', cursor: 'pointer' }}>
+                    Accéder →
+                  </span>
                 </div>
               </div>
             ))}
